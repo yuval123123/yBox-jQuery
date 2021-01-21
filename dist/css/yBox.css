@@ -1,7 +1,7 @@
 /*! yBox - v1.0 - 2020-09-03
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
-
+.yBoxOverlay *{-webkit-box-sizing:border-box;box-sizing:border-box;}
 .yBoxOverlay{
 	background:rgba(0,0,0,0.5);
 	display:flex;
@@ -71,7 +71,6 @@
 	transform:rotate(45deg);
 	-webkit-transition:all 0.5s ease;
 	transition:all 0.5s ease;
-	will-change:background-color,transform;
 }
 .closeYbox::after{
 	-webkit-transform:rotate(-45deg);
@@ -107,9 +106,10 @@
 	bottom:10px;
 }
 .insertYboxAjaxHere{
-	min-height:23px;
-	max-height:-webkit-calc(100vh - 140px);
-	max-height:calc(100vh - 140px);
+	min-width:150px;
+	min-height:100px;
+	max-height:-webkit-calc(100vh - 100px);
+	max-height:calc(100vh - 100px);
 	overflow:auto;
 	padding:50px 19px 13px;
 }
@@ -164,34 +164,25 @@
 	border-left-color:#fff;
 }
 .yBoxLoader{
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    position: relative;
-    animation: yBox-loader-circles 1s linear infinite;
-    top: 50%;
-    margin: -8px auto 0 auto;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    position:relative;
+    animation:yBox-loader-circles 1s linear infinite;
+    top:50%;
+    margin:-8px auto 0 auto;
 	zoom:0.5;
 }
 @keyframes yBox-loader-circles{
-  0% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.05), 19px -19px 0 0 rgba(0, 0, 0, 0.1), 27px 0 0 0 rgba(0, 0, 0, 0.2), 19px 19px 0 0 rgba(0, 0, 0, 0.3), 0 27px 0 0 rgba(0, 0, 0, 0.4), -19px 19px 0 0 rgba(0, 0, 0, 0.6), -27px 0 0 0 rgba(0, 0, 0, 0.8), -19px -19px 0 0 #ffffff; }
-  12.5% {
-    box-shadow: 0 -27px 0 0 #ffffff, 19px -19px 0 0 rgba(0, 0, 0, 0.05), 27px 0 0 0 rgba(0, 0, 0, 0.1), 19px 19px 0 0 rgba(0, 0, 0, 0.2), 0 27px 0 0 rgba(0, 0, 0, 0.3), -19px 19px 0 0 rgba(0, 0, 0, 0.4), -27px 0 0 0 rgba(0, 0, 0, 0.6), -19px -19px 0 0 rgba(0, 0, 0, 0.8); }
-  25% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.8), 19px -19px 0 0 #ffffff, 27px 0 0 0 rgba(0, 0, 0, 0.05), 19px 19px 0 0 rgba(0, 0, 0, 0.1), 0 27px 0 0 rgba(0, 0, 0, 0.2), -19px 19px 0 0 rgba(0, 0, 0, 0.3), -27px 0 0 0 rgba(0, 0, 0, 0.4), -19px -19px 0 0 rgba(0, 0, 0, 0.6); }
-  37.5% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.6), 19px -19px 0 0 rgba(0, 0, 0, 0.8), 27px 0 0 0 #ffffff, 19px 19px 0 0 rgba(0, 0, 0, 0.05), 0 27px 0 0 rgba(0, 0, 0, 0.1), -19px 19px 0 0 rgba(0, 0, 0, 0.2), -27px 0 0 0 rgba(0, 0, 0, 0.3), -19px -19px 0 0 rgba(0, 0, 0, 0.4); }
-  50% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.4), 19px -19px 0 0 rgba(0, 0, 0, 0.6), 27px 0 0 0 rgba(0, 0, 0, 0.8), 19px 19px 0 0 #ffffff, 0 27px 0 0 rgba(0, 0, 0, 0.05), -19px 19px 0 0 rgba(0, 0, 0, 0.1), -27px 0 0 0 rgba(0, 0, 0, 0.2), -19px -19px 0 0 rgba(0, 0, 0, 0.3); }
-  62.5% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.3), 19px -19px 0 0 rgba(0, 0, 0, 0.4), 27px 0 0 0 rgba(0, 0, 0, 0.6), 19px 19px 0 0 rgba(0, 0, 0, 0.8), 0 27px 0 0 #ffffff, -19px 19px 0 0 rgba(0, 0, 0, 0.05), -27px 0 0 0 rgba(0, 0, 0, 0.1), -19px -19px 0 0 rgba(0, 0, 0, 0.2); }
-  75% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.2), 19px -19px 0 0 rgba(0, 0, 0, 0.3), 27px 0 0 0 rgba(0, 0, 0, 0.4), 19px 19px 0 0 rgba(0, 0, 0, 0.6), 0 27px 0 0 rgba(0, 0, 0, 0.8), -19px 19px 0 0 #ffffff, -27px 0 0 0 rgba(0, 0, 0, 0.05), -19px -19px 0 0 rgba(0, 0, 0, 0.1); }
-  87.5% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.1), 19px -19px 0 0 rgba(0, 0, 0, 0.2), 27px 0 0 0 rgba(0, 0, 0, 0.3), 19px 19px 0 0 rgba(0, 0, 0, 0.4), 0 27px 0 0 rgba(0, 0, 0, 0.6), -19px 19px 0 0 rgba(0, 0, 0, 0.8), -27px 0 0 0 #ffffff, -19px -19px 0 0 rgba(0, 0, 0, 0.05); }
-  100% {
-    box-shadow: 0 -27px 0 0 rgba(0, 0, 0, 0.05), 19px -19px 0 0 rgba(0, 0, 0, 0.1), 27px 0 0 0 rgba(0, 0, 0, 0.2), 19px 19px 0 0 rgba(0, 0, 0, 0.3), 0 27px 0 0 rgba(0, 0, 0, 0.4), -19px 19px 0 0 rgba(0, 0, 0, 0.6), -27px 0 0 0 rgba(0, 0, 0, 0.8), -19px -19px 0 0 #ffffff; }
+	0%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.05),19px -19px 0 0 rgba(0,0,0,0.1),27px 0 0 0 rgba(0,0,0,0.2),19px 19px 0 0 rgba(0,0,0,0.3),0 27px 0 0 rgba(0,0,0,0.4),-19px 19px 0 0 rgba(0,0,0,0.6),-27px 0 0 0 rgba(0,0,0,0.8),-19px -19px 0 0 #ffffff;}
+	12.5%{box-shadow:0 -27px 0 0 #ffffff,19px -19px 0 0 rgba(0,0,0,0.05),27px 0 0 0 rgba(0,0,0,0.1),19px 19px 0 0 rgba(0,0,0,0.2),0 27px 0 0 rgba(0,0,0,0.3),-19px 19px 0 0 rgba(0,0,0,0.4),-27px 0 0 0 rgba(0,0,0,0.6),-19px -19px 0 0 rgba(0,0,0,0.8);}
+	25%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.8),19px -19px 0 0 #ffffff,27px 0 0 0 rgba(0,0,0,0.05),19px 19px 0 0 rgba(0,0,0,0.1),0 27px 0 0 rgba(0,0,0,0.2),-19px 19px 0 0 rgba(0,0,0,0.3),-27px 0 0 0 rgba(0,0,0,0.4),-19px -19px 0 0 rgba(0,0,0,0.6);}
+	37.5%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.6),19px -19px 0 0 rgba(0,0,0,0.8),27px 0 0 0 #ffffff,19px 19px 0 0 rgba(0,0,0,0.05),0 27px 0 0 rgba(0,0,0,0.1),-19px 19px 0 0 rgba(0,0,0,0.2),-27px 0 0 0 rgba(0,0,0,0.3),-19px -19px 0 0 rgba(0,0,0,0.4);}
+	50%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.4),19px -19px 0 0 rgba(0,0,0,0.6),27px 0 0 0 rgba(0,0,0,0.8),19px 19px 0 0 #ffffff,0 27px 0 0 rgba(0,0,0,0.05),-19px 19px 0 0 rgba(0,0,0,0.1),-27px 0 0 0 rgba(0,0,0,0.2),-19px -19px 0 0 rgba(0,0,0,0.3);}
+	62.5%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.3),19px -19px 0 0 rgba(0,0,0,0.4),27px 0 0 0 rgba(0,0,0,0.6),19px 19px 0 0 rgba(0,0,0,0.8),0 27px 0 0 #ffffff,-19px 19px 0 0 rgba(0,0,0,0.05),-27px 0 0 0 rgba(0,0,0,0.1),-19px -19px 0 0 rgba(0,0,0,0.2);}
+	75%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.2),19px -19px 0 0 rgba(0,0,0,0.3),27px 0 0 0 rgba(0,0,0,0.4),19px 19px 0 0 rgba(0,0,0,0.6),0 27px 0 0 rgba(0,0,0,0.8),-19px 19px 0 0 #ffffff,-27px 0 0 0 rgba(0,0,0,0.05),-19px -19px 0 0 rgba(0,0,0,0.1);}
+	87.5%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.1),19px -19px 0 0 rgba(0,0,0,0.2),27px 0 0 0 rgba(0,0,0,0.3),19px 19px 0 0 rgba(0,0,0,0.4),0 27px 0 0 rgba(0,0,0,0.6),-19px 19px 0 0 rgba(0,0,0,0.8),-27px 0 0 0 #ffffff,-19px -19px 0 0 rgba(0,0,0,0.05);}
+	100%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.05),19px -19px 0 0 rgba(0,0,0,0.1),27px 0 0 0 rgba(0,0,0,0.2),19px 19px 0 0 rgba(0,0,0,0.3),0 27px 0 0 rgba(0,0,0,0.4),-19px 19px 0 0 rgba(0,0,0,0.6),-27px 0 0 0 rgba(0,0,0,0.8),-19px -19px 0 0 #ffffff;}
 }
 @media screen and (max-width:767px){
 	.yBoxFrame.yBoxImgWrap .insertYboxAjaxHere{padding:5px;max-height:-webkit-calc(100vh - 10px);max-height:calc(100vh - 10px);}
@@ -200,13 +191,13 @@
 	.yBoxFrame.yBoxImgWrap .yBoxPrevImg::after{right:50%;width:14px;height:14px;}
 	.yBoxFrame.yBoxImgWrap .yBoxNextImg::after{left:50%;width:14px;height:14px;}
 	.yBoxFrame.yBoxIframeWrap .insertYboxAjaxHere{left:5px;right:5px;top:5px;bottom:5px;}
-	.yBoxFrame.yBoxImgWrap .yBoxNextImg, .yBoxFrame.yBoxImgWrap .yBoxPrevImg{width:50px;max-width:30%;height:50%;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);}
+	.yBoxFrame.yBoxImgWrap .yBoxNextImg,.yBoxFrame.yBoxImgWrap .yBoxPrevImg{width:50px;max-width:30%;height:50%;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);}
 	.yBoxFrame.yBoxImgWrap .insertYboxAjaxHere{height:-webkit-calc(100vh - 10px);height:calc(100vh - 10px);}
 	.yBoxFrame.yBoxImgWrap{width:-webkit-calc(100vw - 10px);width:calc(100vw - 10px);height:-webkit-calc(100vh - 10px);height:calc(100vh - 10px);}
 	.yBoxImgZoom{display:flex;justify-content:center;align-items:center;background:#000;overflow:hidden;}
 }
 @media screen and (max-width:479px){
-	.yBoxFrame.yBoxImgWrap, .yBoxFrame.yBoxIframeWrap{height:-webkit-calc(100vh - 80px);height:calc(100vh - 80px);}
-	.yBoxFrame.yBoxImgWrap .insertYboxAjaxHere, .yBoxFrame.yBoxIframeWrap .insertYboxAjaxHere{height:-webkit-calc(100vh - 80px);height:calc(100vh - 80px);}
-	.yBoxFrame.yBoxImgWrap img.yBoxImg, .yBoxIframe{max-height:-webkit-calc(100vh - 90px);max-height:calc(100vh - 90px);}
+	.yBoxFrame.yBoxImgWrap,.yBoxFrame.yBoxIframeWrap{height:-webkit-calc(100vh - 80px);height:calc(100vh - 80px);}
+	.yBoxFrame.yBoxImgWrap .insertYboxAjaxHere,.yBoxFrame.yBoxIframeWrap .insertYboxAjaxHere{height:-webkit-calc(100vh - 80px);height:calc(100vh - 80px);}
+	.yBoxFrame.yBoxImgWrap img.yBoxImg,.yBoxIframe{max-height:-webkit-calc(100vh - 90px);max-height:calc(100vh - 90px);}
 }
