@@ -68,7 +68,7 @@ function insertPopHtml(self,hasSelf,url,code){
 				var youtube_id = url.replace(/^[^v]+v.(.{11}).*/,"$1").replace('https://youtu.be/','').replace(/.*youtube.com\/embed\//,'');
 				url = 'https://www.youtube.com/embed/'+youtube_id+'?wmode=transparent&rel=0&autoplay=1';
 			}
-			$('.yBoxFrame .insertYboxAjaxHere').html('<iframe src="'+url+'" frameborder="0" wmode="Opaque" allowfullscreen class="yBoxIframe"></iframe>');
+			$('.yBoxFrame .insertYboxAjaxHere').html('<iframe src="'+url+'" frameborder="0" wmode="Opaque" allow="autoplay" allowfullscreen class="yBoxIframe"></iframe>');
 		}else if(self.hasClass('yBox_ajax')){
 			//ajax
 			$.get(url,function(data){
@@ -77,11 +77,7 @@ function insertPopHtml(self,hasSelf,url,code){
 		}else if(url.indexOf('#') == -1){
 			//image
 			$('.yBoxFrame').addClass('yBoxImgWrap');
-			if($('.yBoxImg').length){
-				$('.insertYboxAjaxHere').append('<div style="text-align:center;position:absolute;right:0;left:0;top:0;bottom:0;"><div class="yBoxLoader"></div></div>');
-			}else{
-				$('.insertYboxAjaxHere').append('<div style="text-align:center;"><div class="yBoxLoader"></div></div>');
-			}
+			$('.insertYboxAjaxHere').append('<div style="text-align:center;position:absolute;right:0;left:0;top:0;bottom:0;"><div class="yBoxLoader"></div></div>');
 			var img = new Image();
 			img.src = url;
 			img.className = 'yBoxImg';
@@ -94,10 +90,10 @@ function insertPopHtml(self,hasSelf,url,code){
 				$('.insertYboxAjaxHere').html(code);
 				if(window.screen.width <= 767)
 					zoom({zoom:'yBoxImgZoom'});
-				$('.yBoxNextImg').click(function(){
+				$('.yBoxNextImg').click(function(e){
 					myNextPopup(self);
 				});
-				$('.yBoxPrevImg').click(function(){
+				$('.yBoxPrevImg').click(function(e){
 					myPrevPopup(self);
 				});
 			};
@@ -113,14 +109,14 @@ function myNextPopup(self){
 	var group = self.data('ybox-group');
 	var next;
 	var x = false;
-	$('.yBox[data-ybox-group="'+group+'"]').each(function(i){
+	$('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').each(function(i){
 		if(!x){
 			if($(this).attr('href') == self.attr('href')){
 				x = true;
-				if($('.yBox[data-ybox-group="'+group+'"]').eq(i+1).length){
-					next = $('.yBox[data-ybox-group="'+group+'"]').eq(i+1);
+				if($('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').eq(i+1).length){
+					next = $('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').eq(i+1);
 				}else{
-					next = $('.yBox[data-ybox-group="'+group+'"]').eq(0);
+					next = $('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').eq(0);
 				}
 			}
 		}
@@ -130,13 +126,13 @@ function myNextPopup(self){
 function myPrevPopup(self){
 	var group = self.data('ybox-group');
 	var prev;
-	$('.yBox[data-ybox-group="'+group+'"]').each(function(i){
+	$('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').each(function(i){
 		if($(this).attr('href') == self.attr('href')){
-			if($('.yBox[data-ybox-group="'+group+'"]').eq(i-1).length){
-				prev = $('.yBox[data-ybox-group="'+group+'"]').eq(i-1);
+			if($('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').eq(i-1).length){
+				prev = $('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').eq(i-1);
 			}else{
-				var count = $('.yBox[data-ybox-group="'+group+'"]').length;
-				prev = $('.yBox[data-ybox-group="'+group+'"]').eq(count-1);
+				var count = $('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').length;
+				prev = $('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').eq(count-1);
 			}
 		}
 	});
