@@ -82,8 +82,9 @@ function insertPopHtml(self,hasSelf,url,code){
 			img.src = url;
 			img.className = 'yBoxImg';
 			img.onload = function(){
-				var code = '<div class="yBoxImgZoom"><img src="'+url+'" alt="" class="yBoxImg" /></div>';
 				var group = self.data('ybox-group');
+				var alt = self.data('ybox-alt') || '';
+				var code = '<div class="yBoxImgZoom"><img src="'+url+'" alt="'+alt+'" class="yBoxImg" /></div>';
 				if(group && $('.yBox[data-ybox-group="'+group+'"]').length > 1){
 					code = '<button type="button" class="yBoxNextImg" title="Next"></button>'+code+'<button type="button" class="yBoxPrevImg" title="Prev"></button>';
 				}
@@ -104,6 +105,7 @@ function insertPopHtml(self,hasSelf,url,code){
 	}else{
 		$('.insertYboxAjaxHere').html(code);
 	}
+	$('.insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
 };
 function myNextPopup(self){
 	var group = self.data('ybox-group');
