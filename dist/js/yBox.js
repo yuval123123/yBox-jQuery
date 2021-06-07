@@ -1,10 +1,12 @@
-/*! yBox - v1.1 - 2021-11-05
+/*! yBox - v1.2 - 2021-07-06
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
 //yBox
 $('body').on('click','.yBox',function(e){
 	e.preventDefault();
+	$('.yBox.yBoxFocus').removeClass('yBoxFocus');
+	$(this).addClass('yBoxFocus');
 	yBox('',$(this));
 });
 function yBox(code,self){
@@ -105,7 +107,13 @@ function insertPopHtml(self,hasSelf,url,code){
 	}else{
 		$('.insertYboxAjaxHere').html(code);
 	}
-	$('.insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
+	setTimeout(function(){
+		if(self.data('focus')){
+			$('.insertYboxAjaxHere .'+self.data('focus')).focus();
+		}else{
+			$('.insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
+		}
+	},500);
 };
 function myNextPopup(self){
 	var group = self.data('ybox-group');
@@ -123,7 +131,11 @@ function myNextPopup(self){
 			}
 		}
 	});
-	if(next) next.trigger('click');
+	if(next){
+		$('yBox').data('focus','');
+		next.data('focus','yBoxNextImg');
+		next.trigger('click');
+	}
 };
 function myPrevPopup(self){
 	var group = self.data('ybox-group');
@@ -138,12 +150,17 @@ function myPrevPopup(self){
 			}
 		}
 	});
-	if(prev) prev.trigger('click');
+	if(prev){
+		$('yBox').data('focus','');
+		prev.data('focus','yBoxPrevImg');
+		prev.trigger('click');
+	}
 };
 //Close
 $('body').on('click','.yBoxOverlay',function(e){
 	if(e.target.className == 'yBoxOverlay active' || e.target.className == 'closeYbox'){
-		$('.yBoxOverlay').removeClass('active')
+		$('.yBoxOverlay').removeClass('active');
+		$('.yBoxFocus').focus();
 		setTimeout(function(){
 			if($('.yBoxFramePlaceHolder').length){
 				$('.yBoxFramePlaceHolder').before($('.insertYboxAjaxHere').html());
