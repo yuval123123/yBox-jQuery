@@ -22,7 +22,7 @@ function yBox(code,self){
 	}
 	var html = '<div class="yBoxOverlay">\
 					<div class="yBoxFrame '+popupClass+'">\
-						<div class="insertYboxAjaxHere"></div>\
+						<div class="insertYboxAjaxHere" tabindex="0"></div>\
 						<button type="button" class="closeYbox" title="Close"></button>\
 					</div>\
 				</div>';
@@ -111,7 +111,7 @@ function insertPopHtml(self,hasSelf,url,code){
 		if(self.data('focus')){
 			$('.insertYboxAjaxHere .'+self.data('focus')).focus();
 		}else{
-			$('.insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
+			$('.insertYboxAjaxHere iframe, .insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
 		}
 	},500);
 };
