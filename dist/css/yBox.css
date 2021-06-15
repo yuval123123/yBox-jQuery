@@ -1,4 +1,4 @@
-/*! yBox - v1.2 - 07/06/2021
+/*! yBox - v2.0 - 15/06/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 .yBoxOverlay *{-webkit-box-sizing:border-box;box-sizing:border-box;}
@@ -28,7 +28,8 @@
 }
 .yBoxImgZoom{width:100%;height:100%;}
 .yBoxFrame{
-	background:#fff;
+	background:#000;
+	color:#fff;
 	max-width:-webkit-calc(100% - 10px);
 	max-width:calc(100% - 10px);
 	max-height:-webkit-calc(100vh - 10px);
@@ -44,7 +45,7 @@
 	transform:translate(0,0);
 }
 .closeYbox{
-	background:#fff;
+	background:#000;
 	background-size:100% 100%;
 	width:35px;
 	height:35px;
@@ -60,7 +61,7 @@
 .closeYbox::before,
 .closeYbox::after{
 	content:'';
-	background-color:#616161;
+	background-color:#fff;
 	width:25px;
 	height:2px;
 	position:absolute;
@@ -76,16 +77,15 @@
 	transform:rotate(-45deg);
 }
 .closeYbox:hover::before{
-	background-color:#CC0033;
 	-webkit-transform:rotate(135deg);
 	transform:rotate(135deg);
 }
 .closeYbox:hover::after{
-	background-color:#CC0033;
 	-webkit-transform:rotate(45deg);
 	transform:rotate(45deg);
 }
 .yBoxIframe{
+	background:#000;
 	width:100%;
 	height:100%;
 	position:absolute;
@@ -103,6 +103,7 @@
 	top:10px;
 	right:10px;
 	bottom:10px;
+	padding:0;
 }
 .insertYboxAjaxHere{
 	min-width:150px;
@@ -183,9 +184,14 @@
 	87.5%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.1),19px -19px 0 0 rgba(0,0,0,0.2),27px 0 0 0 rgba(0,0,0,0.3),19px 19px 0 0 rgba(0,0,0,0.4),0 27px 0 0 rgba(0,0,0,0.6),-19px 19px 0 0 rgba(0,0,0,0.8),-27px 0 0 0 #ffffff,-19px -19px 0 0 rgba(0,0,0,0.05);}
 	100%{box-shadow:0 -27px 0 0 rgba(0,0,0,0.05),19px -19px 0 0 rgba(0,0,0,0.1),27px 0 0 0 rgba(0,0,0,0.2),19px 19px 0 0 rgba(0,0,0,0.3),0 27px 0 0 rgba(0,0,0,0.4),-19px 19px 0 0 rgba(0,0,0,0.6),-27px 0 0 0 rgba(0,0,0,0.8),-19px -19px 0 0 #ffffff;}
 }
+.yBoxVideo{
+	width:100%;
+	height:100%;
+	vertical-align:top;
+}
 @media screen and (max-width:767px){
 	.yBoxFrame.yBoxImgWrap .insertYboxAjaxHere{padding:5px;max-height:-webkit-calc(100vh - 10px);max-height:calc(100vh - 10px);}
-	.closeYbox{top:5px;right:5px;}
+	{top:5px;right:5px;}
 	.yBoxFrame.yBoxImgWrap img.yBoxImg{max-width:-webkit-calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:-webkit-calc(100vh - 20px);max-height:calc(100vh - 20px);}
 	.yBoxFrame.yBoxImgWrap .yBoxPrevImg::after{right:50%;width:14px;height:14px;}
 	.yBoxFrame.yBoxImgWrap .yBoxNextImg::after{left:50%;width:14px;height:14px;}

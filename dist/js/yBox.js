@@ -1,4 +1,4 @@
-/*! yBox - v1.2 - 07/06/2021
+/*! yBox - v2.0 - 15/06/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
@@ -71,6 +71,10 @@ function insertPopHtml(self,hasSelf,url,code){
 				url = 'https://www.youtube.com/embed/'+youtube_id+'?wmode=transparent&rel=0&autoplay=1';
 			}
 			$('.yBoxFrame .insertYboxAjaxHere').html('<iframe src="'+url+'" frameborder="0" wmode="Opaque" allow="autoplay" allowfullscreen class="yBoxIframe"></iframe>');
+		}else if(self.hasClass('yBox_video')){
+			//video
+			$('.yBoxFrame').addClass('yBoxIframeWrap');
+			$('.yBoxFrame .insertYboxAjaxHere').html('<video class="yBoxVideo" autoplay controls preload plays-inline playsinline><source src="'+url+'" type="video/mp4" /></video>');
 		}else if(self.hasClass('yBox_ajax')){
 			//ajax
 			$.get(url,function(data){

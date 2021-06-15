@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1" />
 	<title>POPUP</title>
-	<link rel="stylesheet" href="dist/css/demo.css" />
+	<link rel="stylesheet" href="demo_files/demo.css" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -52,6 +52,15 @@
 				<code><span class="blue">&lt;a</span> <span class="red">href</span>="<span class="purple">https://www.youtube.com...</span>" <span class="red">class</span>="<span class="purple">yBox yBox_iframe</span>"<span class="blue">&gt; &lt;/a&gt;</span></code>
 			</pre>
 		</section>
+		<section class="iframeSection">
+			<h3>קישור לסרטון <span class="grey2" style="display:inline-block;direction:ltr;">( class="yBox yBox_video" )</span></h3>
+			<a href="demo_files/mov_bbb.mp4" class="yBox yBox_video" rel="nofollow" title="Click Here">
+				<img id="koko" src="demo_files/movie_img.jpg" alt="" width="100" height="100" />
+			</a>
+			<pre> 
+				<code><span class="blue">&lt;a</span> <span class="red">href</span>="<span class="purple">/path/to/video/video.mp4</span>" <span class="red">class</span>="<span class="purple">yBox yBox_video</span>"<span class="blue">&gt; &lt;/a&gt;</span></code>
+			</pre>
+		</section>
 		<section>
 			<h3>הוספת class שונה <span class="grey2" style="display:inline-block;direction:ltr;">( data-ybox-class="my_class" )</span></h3>
 			<a href="#myLink" data-ybox-class="myYboxClass" class="yBox">לחצו כאן לדוגמה</a>
@@ -59,8 +68,10 @@
 				<code><span class="blue">&lt;a</span> <span class="red">href</span>="<span class="purple">#myLink</span>" <span class="red">data-ybox-class</span>="<span class="purple">myYboxClass</span>" <span class="red">class</span>="<span class="purple">yBox</span>"<span class="blue">&gt; &lt;/a&gt;</span></code>
 			</pre>
 
-			<div id="myLink" style="display:none;">
-				Hey - look at me!!
+			<div style="display:none;">
+				<div id="myLink" style="direction:ltr;">
+					Hey - look at me!!
+				</div> 
 			</div> 
 		</section>
 		<section>
