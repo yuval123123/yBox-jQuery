@@ -24,18 +24,18 @@ if(yLang == 'he'){
 	};
 }
 function yBox(code,self){
-	var popupClass = '';
+	var yBoxClass = '';
 	var hasSelf = true;
 	
 	if(typeof self == 'undefined'){
 		hasSelf = false;
 	}
 	if(hasSelf){
-		popupClass = self.data('ybox-class') || '';
+		yBoxClass = self.data('ybox-class') || '';
 		var url = self.attr('href');
 	}
 	var html = '<div class="yBoxOverlay">\
-					<div class="yBoxFrame '+popupClass+'">\
+					<div class="yBoxFrame '+yBoxClass+'">\
 						<div class="insertYboxAjaxHere" tabindex="0"></div>\
 						<button type="button" class="closeYbox" title="'+strings.close+'"></button>\
 					</div>\
@@ -112,10 +112,10 @@ function insertPopHtml(self,hasSelf,url,code){
 				if(window.screen.width <= 767)
 					zoom({zoom:'yBoxImgZoom'});
 				$('.yBoxNextImg').click(function(e){
-					myNextPopup(self);
+					yBoxNext(self);
 				});
 				$('.yBoxPrevImg').click(function(e){
-					myPrevPopup(self);
+					yBoxPrev(self);
 				});
 			};
 		}else{
@@ -133,7 +133,7 @@ function insertPopHtml(self,hasSelf,url,code){
 		}
 	},500);
 };
-function myNextPopup(self){
+function yBoxNext(self){
 	var group = self.data('ybox-group');
 	var next;
 	var x = false;
@@ -155,7 +155,7 @@ function myNextPopup(self){
 		next.trigger('click');
 	}
 };
-function myPrevPopup(self){
+function yBoxPrev(self){
 	var group = self.data('ybox-group');
 	var prev;
 	$('.yBox[data-ybox-group="'+group+'"]:not(.swiper-slide-duplicate)').each(function(i){
@@ -190,10 +190,10 @@ $('body').on('click','.yBoxOverlay',function(e){
 });
 $(document).keyup(function(e){
 	if(e.keyCode === 39){ //Prev
-		myPrevPopup($('.yBox[href="'+$('.yBoxImg').attr('src')+'"]'));
+		yBoxPrev($('.yBox[href="'+$('.yBoxImg').attr('src')+'"]'));
 	}
 	if(e.keyCode === 37){ //Next
-		myNextPopup($('.yBox[href="'+$('.yBoxImg').attr('src')+'"]'));
+		yBoxNext($('.yBox[href="'+$('.yBoxImg').attr('src')+'"]'));
 	}
 	if(e.keyCode === 27){ //Esc
 		$('.closeYbox').trigger('click');
