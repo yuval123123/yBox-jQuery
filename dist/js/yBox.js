@@ -1,4 +1,4 @@
-/*! yBox - v2.0 - 15/06/2021
+/*! yBox - v2.1 - 21/06/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
@@ -9,6 +9,20 @@ $('body').on('click','.yBox',function(e){
 	$(this).addClass('yBoxFocus');
 	yBox('',$(this));
 });
+var yUrl = new URL(document.currentScript.src);
+var yLang = yUrl.searchParams.get("lang");
+var strings = {
+	close	: 'Close',
+	next	: 'Next',
+	prev	: 'Prev'
+};
+if(yLang == 'he'){
+	strings = {
+		close	: 'סגירה',
+		next	: 'הבא',
+		prev	: 'הקודם'
+	};
+}
 function yBox(code,self){
 	var popupClass = '';
 	var hasSelf = true;
@@ -23,7 +37,7 @@ function yBox(code,self){
 	var html = '<div class="yBoxOverlay">\
 					<div class="yBoxFrame '+popupClass+'">\
 						<div class="insertYboxAjaxHere" tabindex="0"></div>\
-						<button type="button" class="closeYbox" title="Close"></button>\
+						<button type="button" class="closeYbox" title="'+strings.close+'"></button>\
 					</div>\
 				</div>';
 				
@@ -92,7 +106,7 @@ function insertPopHtml(self,hasSelf,url,code){
 				var alt = self.data('ybox-alt') || '';
 				var code = '<div class="yBoxImgZoom"><img src="'+url+'" alt="'+alt+'" class="yBoxImg" /></div>';
 				if(group && $('.yBox[data-ybox-group="'+group+'"]').length > 1){
-					code = '<button type="button" class="yBoxNextImg" title="Next"></button>'+code+'<button type="button" class="yBoxPrevImg" title="Prev"></button>';
+					code = '<button type="button" class="yBoxNextImg" title="'+strings.next+'"></button>'+code+'<button type="button" class="yBoxPrevImg" title="'+strings.prev+'"></button>';
 				}
 				$('.insertYboxAjaxHere').html(code);
 				if(window.screen.width <= 767)
