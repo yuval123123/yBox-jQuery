@@ -36,8 +36,10 @@ function yBox(code,self){
 	}
 	var html = '<div class="yBoxOverlay">\
 					<div class="yBoxFrame '+yBoxClass+'">\
+						<button type="button" class="closeYboxOnFocus"></button>\
 						<div class="insertYboxAjaxHere" tabindex="0"></div>\
 						<button type="button" class="closeYbox" title="'+strings.close+'"></button>\
+						<button type="button" class="closeYboxOnFocus"></button>\
 					</div>\
 				</div>';
 				
@@ -187,6 +189,9 @@ $('body').on('click','.yBoxOverlay',function(e){
 			$('.yBoxOverlay').remove();
 		},600);
 	}
+});
+$('body').on('focus','.closeYboxOnFocus',function(){
+	$('.closeYbox').trigger('click');
 });
 $(document).keyup(function(e){
 	if(e.keyCode === 39){ //Prev
