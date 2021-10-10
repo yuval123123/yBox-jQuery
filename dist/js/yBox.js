@@ -1,4 +1,4 @@
-/*! yBox - v2.1 - 21/06/2021
+/*! yBox - v2.2 - 10/10/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
