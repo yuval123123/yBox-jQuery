@@ -40,6 +40,10 @@
 	-webkit-transform:translate(0,30px);
 	transform:translate(0,30px);
 }
+.yBoxFrame.yBoxContentFrame{
+	background:#fff;
+	color:#000;
+}
 .yBoxOverlay.active .yBoxFrame{
 	-webkit-transform:translate(0,0);
 	transform:translate(0,0);
@@ -83,6 +87,13 @@
 .closeYbox:hover::after{
 	-webkit-transform:rotate(45deg);
 	transform:rotate(45deg);
+}
+.yBoxFrame.yBoxContentFrame .closeYbox{
+	background:#fff;
+}
+.yBoxFrame.yBoxContentFrame .closeYbox::after, 
+.yBoxFrame.yBoxContentFrame .closeYbox::before{
+	background-color:#000;
 }
 .yBoxIframe{
 	background:#000;
