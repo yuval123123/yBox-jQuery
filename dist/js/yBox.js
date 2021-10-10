@@ -16,7 +16,7 @@ var strings = {
 	next	: 'Next',
 	prev	: 'Prev'
 };
-if(yLang == 'he'){
+if(yLang == 'he' || yLang == 'he-IL'){
 	strings = {
 		close	: 'סגירה',
 		next	: 'הבא',
