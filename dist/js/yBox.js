@@ -23,11 +23,29 @@ if(yLang == 'he' || yLang == 'he-IL'){
 		prev	: 'הקודם'
 	};
 }
-function yBox(code,self){
-	var yBoxClass = '';
+
+var url = new URL(window.location.href);
+var systemMessage = url.searchParams.get("systemmessage");
+if(systemMessage){
+	yBox(systemMessage,false,'yBoxContentFrame');
+	setTimeout(function(){
+		//***** Remove systemmessage from URL ***********
+		var params = new URLSearchParams(window.location.search);
+		params.delete('systemmessage');
+		if(params.toString()){
+			params = '?'+params.toString();
+		}
+		var newURL = window.location.pathname+params;
+		window.history.pushState("", "", newURL);
+	},500);
+}
+function yBox(code,self,yBoxClass){
 	var hasSelf = true;
 	
-	if(typeof self == 'undefined'){
+	if(typeof yBoxClass == 'undefined'){
+		var yBoxClass = '';
+	}
+	if(typeof self == 'undefined' || !self){
 		hasSelf = false;
 	}
 	if(hasSelf){
@@ -124,16 +142,16 @@ function insertPopHtml(self,hasSelf,url,code){
 			$(url).after('<div class="yBoxFramePlaceHolder"></div>');
 			$(url).appendTo('.insertYboxAjaxHere');
 		}
+		setTimeout(function(){
+			if(self.data('focus')){
+				$('.insertYboxAjaxHere .'+self.data('focus')).focus();
+			}else{
+				$('.insertYboxAjaxHere iframe, .insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
+			}
+		},500);
 	}else{
 		$('.insertYboxAjaxHere').html(code);
 	}
-	setTimeout(function(){
-		if(self.data('focus')){
-			$('.insertYboxAjaxHere .'+self.data('focus')).focus();
-		}else{
-			$('.insertYboxAjaxHere iframe, .insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
-		}
-	},500);
 };
 function yBoxNext(self){
 	var group = self.data('ybox-group');
