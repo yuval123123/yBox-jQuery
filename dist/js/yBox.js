@@ -1,4 +1,4 @@
-/*! yBox - v2.2 - 10/10/2021
+/*! yBox - v2.3 - 17/11/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
@@ -85,7 +85,7 @@ function yBox(code,self,yBoxClass){
 						$('.yBoxFramePlaceHolder').before($('.insertYboxAjaxHere').html());
 						$('.yBoxFramePlaceHolder').remove();
 					}
-					$this.html('');
+					//$this.html('');
 					insertPopHtml(self,hasSelf,url,code);
 					$('.insertYboxAjaxHere').animate({
 						opacity : 1
@@ -112,7 +112,7 @@ function insertPopHtml(self,hasSelf,url,code){
 		}else if(self.hasClass('yBox_ajax')){
 			//ajax
 			$.get(url,function(data){
-				$('.insertYboxAjaxHere').html(data);
+				$('.insertYboxAjaxHere').addClass('isAjax').html(data);
 			});
 		}else if(url.indexOf('#') == -1){
 			//image
@@ -140,7 +140,9 @@ function insertPopHtml(self,hasSelf,url,code){
 			};
 		}else{
 			$(url).after('<div class="yBoxFramePlaceHolder"></div>');
-			$(url).appendTo('.insertYboxAjaxHere');
+			var yBoxHTML = '<div id="'+$(url).attr('id')+'">'+$(url).html()+'</div>';
+			$('.insertYboxAjaxHere').html(yBoxHTML);
+			//$(url).appendTo('.insertYboxAjaxHere');
 		}
 		setTimeout(function(){
 			if(self.data('focus')){
