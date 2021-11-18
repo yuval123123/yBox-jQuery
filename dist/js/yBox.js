@@ -1,4 +1,4 @@
-/*! yBox - v2.3 - 17/11/2021
+/*! yBox - v2.4 - 18/11/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
@@ -142,6 +142,7 @@ function insertPopHtml(self,hasSelf,url,code){
 			$(url).after('<div class="yBoxFramePlaceHolder"></div>');
 			var yBoxHTML = '<div id="'+$(url).attr('id')+'">'+$(url).html()+'</div>';
 			$('.insertYboxAjaxHere').html(yBoxHTML);
+			$(url).remove();
 			//$(url).appendTo('.insertYboxAjaxHere');
 		}
 		setTimeout(function(){
