@@ -1,4 +1,4 @@
-/*! yBox - v2.4 - 18/11/2021
+/*! yBox - v2.5 - 19/11/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
@@ -140,10 +140,13 @@ function insertPopHtml(self,hasSelf,url,code){
 			};
 		}else{
 			$(url).after('<div class="yBoxFramePlaceHolder"></div>');
-			var yBoxHTML = '<div id="'+$(url).attr('id')+'">'+$(url).html()+'</div>';
-			$('.insertYboxAjaxHere').html(yBoxHTML);
-			$(url).remove();
-			//$(url).appendTo('.insertYboxAjaxHere');
+			if($('.insertYboxAjaxHere.isAjax').length){
+				var yBoxHTML = '<div id="'+$(url).attr('id')+'">'+$(url).html()+'</div>';
+				$('.insertYboxAjaxHere').html(yBoxHTML).removeClass('isAjax');
+				//$(url).remove();
+			}else{
+				$(url).appendTo('.insertYboxAjaxHere');
+			}
 		}
 		setTimeout(function(){
 			if(self.data('focus')){
