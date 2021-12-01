@@ -1,4 +1,4 @@
-/*! yBox - v2.5 - 19/11/2021
+/*! yBox - v2.6 - 01/12/2021
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
@@ -207,7 +207,7 @@ $('body').on('click','.yBoxOverlay',function(e){
 		$('.yBoxFocus').focus();
 		setTimeout(function(){
 			if($('.yBoxFramePlaceHolder').length){
-				$('.yBoxFramePlaceHolder').before($('.insertYboxAjaxHere').html());
+				$('.insertYboxAjaxHere > *').insertAfter($('.yBoxFramePlaceHolder'));
 				$('.yBoxFramePlaceHolder').remove();
 			}
 			$('.yBoxOverlay').remove();
