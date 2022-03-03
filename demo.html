@@ -8,6 +8,10 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
+<a href="#xx" class="yBox">XXXX</a>
+<div style="display:none;">
+	<div id="xx">121212121</div>
+</div>
 	<main>
 		<section>
 			<h3>קבצים</h3>
@@ -24,14 +28,28 @@
 			</pre>
 		</section>
 		<section>
+			<h3>הפעלת פונקציה לפני פתיחת yBox</h3>
+			<pre>
+				<code><span class="blue">function</span> beforeYboxOpen(self){ <span class="green">/* Do something before yBox is open */</span> };</code>
+			</pre>
+			<a href="#link1" class="yBox alertBeforeYbox">לחצו כאן לדוגמה</a>
+		</section>
+		<section>
+			<h3>הפעלת פונקציה לאחר פתיחת yBox</h3>
+			<pre>
+				<code><span class="blue">function</span> yBoxIsOpen(self){ <span class="green">/* Do something after yBox is open */</span> };</code>
+			</pre>
+			<a href="#link1" class="yBox alertAfterYbox">לחצו כאן לדוגמה</a>
+		</section>
+		<section>
 			<h3>הוספת פרמטר systemmessage בכתובת</h3>
 			<pre>
-				<code>https://www.domain.com/?systemmessage=Some text</code>
+				<code>https://www.domain.com/?<span style="color:red;">systemmessage</span>=Some text</code>
 			</pre>
 		</section>
 		<section>
 			<h3>קישור לאלמנט בדף <span style="font-size:18px;">( שמכיל קישור yBox פנימי )</span></h3>
-			<a href="#link1" class="yBox">לחצו כאן לדוגמה</a> </a>
+			<a href="#link1" class="yBox">לחצו כאן לדוגמה</a>
 			<pre> 
 				<code><span class="blue">&lt;a</span> <span class="red">href</span>="<span class="purple">#link1</span>"<span class="blue"> <span class="red">class</span>="<span class="purple">yBox</span>"&gt; &lt;/a&gt;</span></code>
 			</pre>
@@ -123,10 +141,19 @@
 
 <link rel="stylesheet" href="dist/css/yBox.min.css" />
 <script type="text/javascript" src="dist/js/directive.min.js"></script>
-<script type="text/javascript" src="dist/js/yBox.min.js?lang=he"></script>
+<script type="text/javascript" src="dist/js/yBox.js?lang=he"></script>
 
 <script type="text/javascript">
-//yBox('אפשר להקפיץ את החלון גם בלי ללחוץ על כלום');
+function beforeYboxOpen(self){
+	if(self.hasClass('alertBeforeYbox')){
+		alert('Before yBox open');
+	}
+};
+function yBoxIsOpen(self){
+	if(self.hasClass('alertAfterYbox')){
+		alert('After yBox open');
+	}
+};
 </script>
 
 </body>

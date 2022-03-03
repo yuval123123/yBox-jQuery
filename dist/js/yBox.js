@@ -1,13 +1,20 @@
-/*! yBox - v2.6 - 01/12/2021
+/*! yBox - v3.0 - 03/03/2022
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
 //yBox
 $('body').on('click','.yBox',function(e){
 	e.preventDefault();
+	var self = $(this);
+	if(typeof beforeYboxOpen != 'undefined'){
+		beforeYboxOpen(self);
+	}
 	$('.yBox.yBoxFocus').removeClass('yBoxFocus');
-	$(this).addClass('yBoxFocus');
-	yBox('',$(this));
+	self.addClass('yBoxFocus');
+	yBox('',self);
+	if(typeof yBoxIsOpen != 'undefined'){
+		yBoxIsOpen(self);
+	}
 });
 var yUrl = new URL(document.currentScript.src);
 var yLang = yUrl.searchParams.get("lang");
@@ -17,6 +24,7 @@ var strings = {
 	prev	: 'Prev'
 };
 if(yLang == 'he' || yLang == 'he-IL'){
+	yLang = 'he';
 	strings = {
 		close	: 'סגירה',
 		next	: 'הבא',
@@ -52,7 +60,7 @@ function yBox(code,self,yBoxClass){
 		yBoxClass = self.data('ybox-class') || '';
 		var url = self.attr('href');
 	}
-	var html = '<div class="yBoxOverlay">\
+	var html = '<div class="yBoxOverlay'+(yLang=='he'?' yBoxRTL':'')+'">\
 					<div class="yBoxFrame '+yBoxClass+'">\
 						<button type="button" class="closeYboxOnFocus"></button>\
 						<div class="insertYboxAjaxHere" tabindex="0"></div>\
@@ -85,7 +93,7 @@ function yBox(code,self,yBoxClass){
 						$('.yBoxFramePlaceHolder').before($('.insertYboxAjaxHere').html());
 						$('.yBoxFramePlaceHolder').remove();
 					}
-					//$this.html('');
+					$this.html('');
 					insertPopHtml(self,hasSelf,url,code);
 					$('.insertYboxAjaxHere').animate({
 						opacity : 1
@@ -148,13 +156,15 @@ function insertPopHtml(self,hasSelf,url,code){
 				$(url).appendTo('.insertYboxAjaxHere');
 			}
 		}
-		setTimeout(function(){
-			if(self.data('focus')){
-				$('.insertYboxAjaxHere .'+self.data('focus')).focus();
-			}else{
-				$('.insertYboxAjaxHere iframe, .insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
-			}
-		},500);
+		if(window.screen.width > 991){
+			setTimeout(function(){
+				if(self.data('focus')){
+					$('.insertYboxAjaxHere .'+self.data('focus')).focus();
+				}else{
+					$('.insertYboxAjaxHere iframe, .insertYboxAjaxHere a, .insertYboxAjaxHere input, .insertYboxAjaxHere select:not(.select2), .insertYboxAjaxHere .select2-selection, .insertYboxAjaxHere button').first().focus();
+				}
+			},500);
+		}
 	}else{
 		$('.insertYboxAjaxHere').html(code);
 	}
@@ -202,12 +212,12 @@ function yBoxPrev(self){
 };
 //Close
 $('body').on('click','.yBoxOverlay',function(e){
-	if(e.target.className == 'yBoxOverlay active' || e.target.className == 'closeYbox'){
+	if(e.target.className.indexOf('yBoxOverlay yBoxRTL active') > -1 || e.target.className.indexOf('yBoxOverlay active') > -1 || e.target.className == 'closeYbox'){
 		$('.yBoxOverlay').removeClass('active');
 		$('.yBoxFocus').focus();
 		setTimeout(function(){
 			if($('.yBoxFramePlaceHolder').length){
-				$('.insertYboxAjaxHere > *').insertAfter($('.yBoxFramePlaceHolder'));
+				$('.yBoxFramePlaceHolder').before($('.insertYboxAjaxHere').html());
 				$('.yBoxFramePlaceHolder').remove();
 			}
 			$('.yBoxOverlay').remove();

@@ -1,4 +1,4 @@
-/*! yBox - v2.2 - 10/10/2021
+/*! yBox - v3.0 - 03/03/2022
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 .yBoxOverlay *{-webkit-box-sizing:border-box;box-sizing:border-box;}
@@ -61,6 +61,10 @@
 	border:none;
 	cursor:pointer;
 	z-index:3;
+}
+.yBoxRTL .closeYbox{
+	right:auto;
+	left:10px;
 }
 .closeYbox::before,
 .closeYbox::after{
