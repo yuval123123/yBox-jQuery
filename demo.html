@@ -24,6 +24,18 @@
 			</pre>
 		</section>
 		<section>
+			<h3>הפעלה בקריאה לאלמנט דרך JavaScript <span style="font-size:16px;">(אפשר להפעיל דרך ה console לבדיקה)</span></h3>
+			<div style="display:none;">
+				<div id="popup" href="#popup">Hello :-)</div>
+			</div>
+			<pre>
+				<code><span class="blue">&lt;div</span> <span class="red">style</span>=<span class="purple">"display:none;"</span><span class="blue">&gt;</span>
+   <span class="blue">&lt;div</span> <span class="red">id</span>=<span class="purple">"popup"</span> <span class="red">href</span>=<span class="purple">"#popup"</span><span class="blue">&gt;</span>Hello :-)<span class="blue">&lt;/div&gt;
+&lt;/div&gt;</span>
+<span class="blue">&lt;script&gt;</span> yBox(<span class="grey">''</span>,$(<span class="grey">'#popup'</span>)); <span class="blue">&lt;/script&gt;</span></code>
+			</pre>
+		</section>
+		<section>
 			<h3>הפעלת פונקציה לפני פתיחת yBox</h3>
 			<pre>
 				<code><span class="blue">function</span> beforeYboxOpen(self){ <span class="green">/* Do something before yBox is open */</span> };</code>
