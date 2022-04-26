@@ -1,10 +1,10 @@
-/*! yBox - v3.0 - 03/03/2022
+/*! yBox - v3.1 - 26/04/2022
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
 //yBox
 $('body').on('click','.yBox',function(e){
-	e.preventDefault();
+	e.stopPropagation();
 	var self = $(this);
 	if(typeof beforeYboxOpen != 'undefined'){
 		beforeYboxOpen(self);
