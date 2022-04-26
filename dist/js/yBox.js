@@ -4,6 +4,7 @@
 
 //yBox
 $('body').on('click','.yBox',function(e){
+	e.preventDefault();
 	e.stopPropagation();
 	var self = $(this);
 	if(typeof beforeYboxOpen != 'undefined'){
