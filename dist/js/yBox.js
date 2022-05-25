@@ -114,7 +114,7 @@ function insertPopHtml(self,hasSelf,url,code){
 				url = 'https://www.youtube.com/embed/'+youtube_id+'?wmode=transparent&rel=0&autoplay=1&hl='+yLang;
 			}
 			if(url.toLowerCase().indexOf('vimeo') > -1){
-				var vimeoID = url.replace('https://vimeo.com/','');
+				var vimeoID = url.replace(/[^0-9]/g,'');
 				url = 'https://player.vimeo.com/video/'+vimeoID+'?autoplay=1';
 			}
 			jQuery('.yBoxFrame .insertYboxAjaxHere').html('<iframe src="'+url+'" frameborder="0" wmode="Opaque" allow="autoplay" allowfullscreen class="yBoxIframe"></iframe>');
