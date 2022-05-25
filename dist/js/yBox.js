@@ -1,4 +1,4 @@
-/*! yBox - v3.2 - 23/05/2022
+/*! yBox - v3.3 - 25/05/2022
 * By Yuval Ashkenazi
 * https://github.com/yuval123123/yBox-jQuery */
 
@@ -112,6 +112,10 @@ function insertPopHtml(self,hasSelf,url,code){
 			if(url.toLowerCase().indexOf('youtube') > -1 || url.toLowerCase().indexOf('youtu.be') > -1){
 				var youtube_id = url.replace(/^[^v]+v.(.{11}).*/,"$1").replace('https://youtu.be/','').replace(/.*youtube.com\/embed\//,'');
 				url = 'https://www.youtube.com/embed/'+youtube_id+'?wmode=transparent&rel=0&autoplay=1&hl='+yLang;
+			}
+			if(url.toLowerCase().indexOf('vimeo') > -1){
+				var vimeoID = url.replace('https://vimeo.com/','');
+				url = 'https://player.vimeo.com/video/'+vimeoID;
 			}
 			jQuery('.yBoxFrame .insertYboxAjaxHere').html('<iframe src="'+url+'" frameborder="0" wmode="Opaque" allow="autoplay" allowfullscreen class="yBoxIframe"></iframe>');
 		}else if(self.hasClass('yBox_video')){
