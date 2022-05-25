@@ -115,7 +115,7 @@ function insertPopHtml(self,hasSelf,url,code){
 			}
 			if(url.toLowerCase().indexOf('vimeo') > -1){
 				var vimeoID = url.replace('https://vimeo.com/','');
-				url = 'https://player.vimeo.com/video/'+vimeoID;
+				url = 'https://player.vimeo.com/video/'+vimeoID+'?autoplay=1';
 			}
 			jQuery('.yBoxFrame .insertYboxAjaxHere').html('<iframe src="'+url+'" frameborder="0" wmode="Opaque" allow="autoplay" allowfullscreen class="yBoxIframe"></iframe>');
 		}else if(self.hasClass('yBox_video')){
