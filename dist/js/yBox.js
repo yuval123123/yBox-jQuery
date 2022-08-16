@@ -1,6 +1,6 @@
 /*! yBox - v3.3 - 25/05/2022
 * By Yuval Ashkenazi
-* https://github.com/yuval123123/yBox-jQuery */
+* https://github.com/yuvalAshkenaz/yBox */
 
 //yBox
 jQuery('body').on('click','.yBox',function(e){
