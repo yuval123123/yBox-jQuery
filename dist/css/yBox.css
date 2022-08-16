@@ -1,6 +1,6 @@
 /*! yBox - v3.0 - 03/03/2022
 * By Yuval Ashkenazi
-* https://github.com/yuval123123/yBox-jQuery */
+* https://github.com/yuvalAshkenaz/yBox */
 .yBoxOverlay *{-webkit-box-sizing:border-box;box-sizing:border-box;}
 .yBoxOverlay{
 	background:rgba(0,0,0,0.5);
@@ -29,6 +29,8 @@
 .yBoxImgZoom{width:100%;height:100%;}
 .yBoxFrame{
 	background:#000;
+	border-radius:5px;
+	box-shadow:#fff 0px 0px 40px -17px;
 	color:#fff;
 	max-width:-webkit-calc(100% - 10px);
 	max-width:calc(100% - 10px);
