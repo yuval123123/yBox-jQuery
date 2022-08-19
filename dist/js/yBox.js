@@ -1,4 +1,4 @@
-/*! yBox - v3.3 - 25/05/2022
+/*! yBox - v3.4 - 19/08/2022
 * By Yuval Ashkenazi
 * https://github.com/yuvalAshkenaz/yBox */
 
@@ -218,6 +218,11 @@ function yBoxPrev(self){
 //Close
 jQuery('body').on('click','.yBoxOverlay',function(e){
 	if(e.target.className.indexOf('yBoxOverlay yBoxRTL active') > -1 || e.target.className.indexOf('yBoxOverlay active') > -1 || e.target.className == 'closeYbox'){
+		if(typeof beforeYboxClose != 'undefined'){
+			var beforeClose = beforeYboxClose($('.yBox.yBoxFocus'));
+			if(beforeClose == false)
+				return false;
+		}
 		jQuery('.yBoxOverlay').removeClass('active');
 		jQuery('.yBoxFocus').focus();
 		setTimeout(function(){
@@ -226,6 +231,9 @@ jQuery('body').on('click','.yBoxOverlay',function(e){
 				jQuery('.yBoxFramePlaceHolder').remove();
 			}
 			jQuery('.yBoxOverlay').remove();
+			if(typeof afterYboxClose != 'undefined'){
+				afterYboxClose($('.yBox.yBoxFocus'));
+			}
 		},600);
 	}
 });
