@@ -36,18 +36,44 @@
 			</pre>
 		</section>
 		<section>
-			<h3>הפעלת פונקציה לפני פתיחת yBox</h3>
+			<h3>
+				הפעלת פונקציה לפני פתיחת yBox<br />
+				<span style="font-size:16px;">self = כפתור yBox</span>
+			</h3>
 			<pre>
 				<code><span class="blue">function</span> beforeYboxOpen(self){ <span class="green">/* Do something before yBox is open */</span> };</code>
 			</pre>
 			<a href="#link1" class="yBox alertBeforeYbox">לחצו כאן לדוגמה</a>
 		</section>
 		<section>
-			<h3>הפעלת פונקציה לאחר פתיחת yBox</h3>
+			<h3>
+				הפעלת פונקציה לאחר פתיחת yBox<br />
+				<span style="font-size:16px;">self = כפתור yBox</span>
+			</h3>
 			<pre>
 				<code><span class="blue">function</span> yBoxIsOpen(self){ <span class="green">/* Do something after yBox is open */</span> };</code>
 			</pre>
 			<a href="#link1" class="yBox alertAfterYbox">לחצו כאן לדוגמה</a>
+		</section>
+		<section>
+			<h3>
+				הפעלת פונקציה לפני סגירת yBox<br />
+				<span style="font-size:16px;">self = כפתור yBox</span>
+			</h3>
+			<pre>
+				<code><span class="blue">function</span> beforeYboxClose(self){ <span class="green">/* Do something before yBox is close */</span> };</code>
+			</pre>
+			<a href="#link1" class="yBox alertBeforeClose">לחצו כאן לדוגמה</a>
+		</section>
+		<section>
+			<h3>
+				הפעלת פונקציה אחרי סגירת yBox<br />
+				<span style="font-size:16px;">self = כפתור yBox</span>
+			</h3>
+			<pre>
+				<code><span class="blue">function</span> afterYboxClose(self){ <span class="green">/* Do something after yBox is close */</span> };</code>
+			</pre>
+			<a href="#link1" class="yBox alertAfterClose">לחצו כאן לדוגמה</a>
 		</section>
 		<section>
 			<h3>הוספת פרמטר systemmessage בכתובת</h3>
@@ -146,7 +172,7 @@
 			</pre>
 		</section>
 	</main>
-
+	
 <link rel="stylesheet" href="dist/css/yBox.min.css" />
 <script type="text/javascript" src="dist/js/directive.min.js"></script>
 <script type="text/javascript" src="dist/js/yBox.min.js?lang=he"></script>
@@ -160,6 +186,19 @@ function beforeYboxOpen(self){
 function yBoxIsOpen(self){
 	if(self.hasClass('alertAfterYbox')){
 		alert('After yBox open');
+	}
+};
+function beforeYboxClose(self){
+	if(self.hasClass('alertBeforeClose')){
+		let confirmAction = confirm("Are you sure you want to close yBox?");
+        if (!confirmAction) {
+			return false;
+		}
+	}
+};
+function afterYboxClose(self){
+	if ( self.hasClass('alertAfterClose') ) {
+		alert('After yBox close');
 	}
 };
 </script>
