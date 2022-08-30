@@ -1,4 +1,4 @@
-/*! yBox - v4.1 - 30/08/2022
+/*! yBox - v4.2 - 30/08/2022
 * By Yuval Ashkenazi
 * https://github.com/yuvalAshkenaz/yBox */
 
@@ -74,7 +74,7 @@ function yBox(json){
 			json.yBoxClass = json.self.data('ybox-class') || '';
 			json.url = json.self.attr('href');
 		}
-		var html = '<div class="yBoxOverlay'+(yLang=='he'?' yBoxRTL':'')+'">\
+		var html = '<div class="yBoxOverlay no-contrast'+(yLang=='he'?' yBoxRTL':'')+'">\
 						<div class="yBoxFrame '+json.yBoxClass+'">\
 							<button type="button" class="closeYboxOnFocus"></button>\
 							<div class="insertYboxAjaxHere" tabindex="0"></div>\
@@ -250,7 +250,13 @@ function yBoxPrev(self){
 };
 //Close
 jQuery('body').on('click','.yBoxOverlay',function(e){
-	if(e.target.className.indexOf('yBoxOverlay yBoxRTL active') > -1 || e.target.className.indexOf('yBoxOverlay active') > -1 || e.target.className.indexOf('closeYbox') > -1){
+	var classes = '';
+	for(var i = 0;i < e.target.classList.length;i++){
+		if(e.target.classList[i].indexOf('yBoxOverlay') > -1 || e.target.classList[i].indexOf('active') > -1){
+			classes += e.target.classList[i]+' ';
+		}
+	};
+	if(classes.indexOf('yBoxOverlay active') > -1 || e.target.className.indexOf('closeYbox') > -1){
 		if(typeof beforeYboxClose != 'undefined'){
 			var beforeClose = beforeYboxClose($('.yBox.yBoxFocus'));
 			if(beforeClose == false)
