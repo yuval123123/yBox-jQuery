@@ -4,7 +4,8 @@ body{
 	font-family:sans-serif;
 	font-size:14px;
 	box-sizing:border-box;  
-	direction:rtl;
+	direction:ltr;
+	margin: 0;
 }
 section{
 	padding:25px;
@@ -24,7 +25,7 @@ pre{
 }
 code{font-family:Consolas,"courier new";}
 main{
-	width:800px;
+	width:1000px;
 	max-width:100%;
 	margin:auto;
 }
@@ -38,9 +39,14 @@ main{
 	padding:17px 60px 17px 30px;
 	font-size:20px;
 }
+.yBoxltr .myYboxClass .insertYboxAjaxHere{
+	padding-left:60px;
+	padding-right:30px;
+}
 .group-wrap{
-	margin:10px 0;
 	display:flex;
+	flex-wrap: wrap;
+	margin:10px 0;
 	align-items:center;
 	justify-content:center;
 }
@@ -108,4 +114,20 @@ h1,h2, h3{
 	color:#808080;
 	font-size:13px;
 	font-family:Consolas,"courier new";
+}
+tr:nth-child(even) {
+	background: #f7f7f7;
+}
+@media screen and (max-width: 991px) {
+	.hide-on-tablet{display: none !important;}
+	table,
+	tbody,
+	tr,
+	td {
+		display: block;
+		width: 100%;
+	}
+	section {
+		padding: 25px 15px;
+	}
 }
