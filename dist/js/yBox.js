@@ -54,72 +54,74 @@ if(msg || yBoxPrm){
 	},500);
 }
 function yBox(json){
-	// code
-	// self
-	// yBoxClass
-	// url
-	if(typeof beforeYboxOpen != 'undefined'){
-		beforeYboxOpen(json.self);
-	}
-	var hasSelf = true;
-	
-	if(typeof json.yBoxClass == 'undefined'){
-		json.yBoxClass = '';
-	}
-	if(typeof json.self == 'undefined' || !json.self){
-		hasSelf = false;
-	}
-	if(hasSelf){
-		json.yBoxClass = json.self.data('ybox-class') || '';
-		json.url = json.self.attr('href');
-	}
-	var html = '<div class="yBoxOverlay'+(yLang=='he'?' yBoxRTL':'')+'">\
-					<div class="yBoxFrame '+json.yBoxClass+'">\
-						<button type="button" class="closeYboxOnFocus"></button>\
-						<div class="insertYboxAjaxHere" tabindex="0"></div>\
-						<button type="button" class="closeYbox" title="'+strings.close+'"></button>\
-						<button type="button" class="closeYboxOnFocus"></button>\
-					</div>\
-				</div>';
-				
-	if(!jQuery('.yBoxFrame').length){
-		jQuery('body').append(html);
-		insertPopHtml(json.self,hasSelf,json.url,json.code);
-		setTimeout(function(){
-			jQuery('.yBoxOverlay').addClass('active');
-		},200);
-	}else{
-		if(jQuery('.yBoxFrame.yBoxImgWrap').length){
-			if(jQuery('.yBoxFramePlaceHolder').length){
-				jQuery('.yBoxFramePlaceHolder').before(jQuery('.insertYboxAjaxHere').html());
-				jQuery('.yBoxFramePlaceHolder').remove();
-			}
-			jQuery('.insertYboxAjaxHere').html('');
+	if(!jQuery('.yBoxOverlay:not(.active)').length){
+		// code
+		// self
+		// yBoxClass
+		// url
+		if(typeof beforeYboxOpen != 'undefined'){
+			beforeYboxOpen(json.self);
+		}
+		var hasSelf = true;
+		
+		if(typeof json.yBoxClass == 'undefined'){
+			json.yBoxClass = '';
+		}
+		if(typeof json.self == 'undefined' || !json.self){
+			hasSelf = false;
+		}
+		if(hasSelf){
+			json.yBoxClass = json.self.data('ybox-class') || '';
+			json.url = json.self.attr('href');
+		}
+		var html = '<div class="yBoxOverlay'+(yLang=='he'?' yBoxRTL':'')+'">\
+						<div class="yBoxFrame '+json.yBoxClass+'">\
+							<button type="button" class="closeYboxOnFocus"></button>\
+							<div class="insertYboxAjaxHere" tabindex="0"></div>\
+							<button type="button" class="closeYbox" title="'+strings.close+'"></button>\
+							<button type="button" class="closeYboxOnFocus"></button>\
+						</div>\
+					</div>';
+					
+		if(!jQuery('.yBoxFrame').length){
+			jQuery('body').append(html);
 			insertPopHtml(json.self,hasSelf,json.url,json.code);
+			setTimeout(function(){
+				jQuery('.yBoxOverlay').addClass('active');
+			},200);
 		}else{
-			jQuery('.insertYboxAjaxHere').animate({
-				opacity : 0
-			},function(){
-				var jQuerythis = jQuery(this);
-				setTimeout(function(){
-					if(jQuery('.yBoxFramePlaceHolder').length){
-						jQuery('.yBoxFramePlaceHolder').before(jQuery('.insertYboxAjaxHere').html());
-						jQuery('.yBoxFramePlaceHolder').remove();
-					}
-					jQuerythis.html('');
-					insertPopHtml(json.self,hasSelf,json.url,json.code);
-					jQuery('.insertYboxAjaxHere').animate({
-						opacity : 1
-					});
-				},200);
-			});
+			if(jQuery('.yBoxFrame.yBoxImgWrap').length){
+				if(jQuery('.yBoxFramePlaceHolder').length){
+					jQuery('.yBoxFramePlaceHolder').before(jQuery('.insertYboxAjaxHere').html());
+					jQuery('.yBoxFramePlaceHolder').remove();
+				}
+				jQuery('.insertYboxAjaxHere').html('');
+				insertPopHtml(json.self,hasSelf,json.url,json.code);
+			}else{
+				jQuery('.insertYboxAjaxHere').animate({
+					opacity : 0
+				},function(){
+					var jQuerythis = jQuery(this);
+					setTimeout(function(){
+						if(jQuery('.yBoxFramePlaceHolder').length){
+							jQuery('.yBoxFramePlaceHolder').before(jQuery('.insertYboxAjaxHere').html());
+							jQuery('.yBoxFramePlaceHolder').remove();
+						}
+						jQuerythis.html('');
+						insertPopHtml(json.self,hasSelf,json.url,json.code);
+						jQuery('.insertYboxAjaxHere').animate({
+							opacity : 1
+						});
+					},200);
+				});
+			}
 		}
+		setTimeout(function(){
+			if(typeof afterYboxOpen != 'undefined'){
+				afterYboxOpen(json.self);
+			}
+		},200);
 	}
-	setTimeout(function(){
-		if(typeof afterYboxOpen != 'undefined'){
-			afterYboxOpen(json.self);
-		}
-	},200);
 };
 function insertPopHtml(self,hasSelf,url,code){
 	if(hasSelf){
