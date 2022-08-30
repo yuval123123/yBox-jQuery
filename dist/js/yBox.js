@@ -1,4 +1,4 @@
-/*! yBox - v3.4 - 19/08/2022
+/*! yBox - v4.1 - 30/08/2022
 * By Yuval Ashkenazi
 * https://github.com/yuvalAshkenaz/yBox */
 
@@ -7,15 +7,9 @@ jQuery('body').on('click','.yBox',function(e){
 	e.preventDefault();
 	e.stopPropagation();
 	var self = jQuery(this);
-	if(typeof beforeYboxOpen != 'undefined'){
-		beforeYboxOpen(self);
-	}
 	jQuery('.yBox.yBoxFocus').removeClass('yBoxFocus');
 	self.addClass('yBoxFocus');
-	yBox('',self);
-	if(typeof yBoxIsOpen != 'undefined'){
-		yBoxIsOpen(self);
-	}
+	yBox({self:self});
 });
 var yUrl = new URL(document.currentScript.src);
 var yLang = yUrl.searchParams.get("lang");
@@ -34,13 +28,24 @@ if(yLang == 'he' || yLang == 'he-IL'){
 }
 
 var url = new URL(window.location.href);
-var systemMessage = url.searchParams.get("systemmessage");
-if(systemMessage){
-	yBox(systemMessage,false,'yBoxContentFrame');
+var msg = url.searchParams.get("msg");
+var yBoxPrm = url.searchParams.get("ybox-url");
+var yBoxClassPrm = url.searchParams.get("ybox-class");
+if(msg || yBoxPrm){
+	if(typeof yBoxPrm != 'undefined' && (yBoxPrm.indexOf('http:') == -1 && yBoxPrm.indexOf('https:') == -1)){
+		yBoxPrm = '#'+yBoxPrm;
+	}
+	yBox({
+		code	  : yBoxPrm ? false : msg,
+		yBoxClass : yBoxClassPrm ? yBoxClassPrm : 'ybox-content-frame',
+		url		  : yBoxPrm ? yBoxPrm : false
+	});
+	//***** Remove msg from URL ***********
 	setTimeout(function(){
-		//***** Remove systemmessage from URL ***********
 		var params = new URLSearchParams(window.location.search);
-		params.delete('systemmessage');
+		params.delete('msg');
+		params.delete('ybox-url');
+		params.delete('ybox-class');
 		if(params.toString()){
 			params = '?'+params.toString();
 		}
@@ -48,21 +53,28 @@ if(systemMessage){
 		window.history.pushState("", "", newURL);
 	},500);
 }
-function yBox(code,self,yBoxClass){
+function yBox(json){
+	// code
+	// self
+	// yBoxClass
+	// url
+	if(typeof beforeYboxOpen != 'undefined'){
+		beforeYboxOpen(json.self);
+	}
 	var hasSelf = true;
 	
-	if(typeof yBoxClass == 'undefined'){
-		var yBoxClass = '';
+	if(typeof json.yBoxClass == 'undefined'){
+		json.yBoxClass = '';
 	}
-	if(typeof self == 'undefined' || !self){
+	if(typeof json.self == 'undefined' || !json.self){
 		hasSelf = false;
 	}
 	if(hasSelf){
-		yBoxClass = self.data('ybox-class') || '';
-		var url = self.attr('href');
+		json.yBoxClass = json.self.data('ybox-class') || '';
+		json.url = json.self.attr('href');
 	}
 	var html = '<div class="yBoxOverlay'+(yLang=='he'?' yBoxRTL':'')+'">\
-					<div class="yBoxFrame '+yBoxClass+'">\
+					<div class="yBoxFrame '+json.yBoxClass+'">\
 						<button type="button" class="closeYboxOnFocus"></button>\
 						<div class="insertYboxAjaxHere" tabindex="0"></div>\
 						<button type="button" class="closeYbox" title="'+strings.close+'"></button>\
@@ -72,7 +84,7 @@ function yBox(code,self,yBoxClass){
 				
 	if(!jQuery('.yBoxFrame').length){
 		jQuery('body').append(html);
-		insertPopHtml(self,hasSelf,url,code);
+		insertPopHtml(json.self,hasSelf,json.url,json.code);
 		setTimeout(function(){
 			jQuery('.yBoxOverlay').addClass('active');
 		},200);
@@ -83,7 +95,7 @@ function yBox(code,self,yBoxClass){
 				jQuery('.yBoxFramePlaceHolder').remove();
 			}
 			jQuery('.insertYboxAjaxHere').html('');
-			insertPopHtml(self,hasSelf,url,code);
+			insertPopHtml(json.self,hasSelf,json.url,json.code);
 		}else{
 			jQuery('.insertYboxAjaxHere').animate({
 				opacity : 0
@@ -95,7 +107,7 @@ function yBox(code,self,yBoxClass){
 						jQuery('.yBoxFramePlaceHolder').remove();
 					}
 					jQuerythis.html('');
-					insertPopHtml(self,hasSelf,url,code);
+					insertPopHtml(json.self,hasSelf,json.url,json.code);
 					jQuery('.insertYboxAjaxHere').animate({
 						opacity : 1
 					});
@@ -103,6 +115,11 @@ function yBox(code,self,yBoxClass){
 			});
 		}
 	}
+	setTimeout(function(){
+		if(typeof afterYboxOpen != 'undefined'){
+			afterYboxOpen(json.self);
+		}
+	},200);
 };
 function insertPopHtml(self,hasSelf,url,code){
 	if(hasSelf){
@@ -154,9 +171,8 @@ function insertPopHtml(self,hasSelf,url,code){
 		}else{
 			jQuery(url).after('<div class="yBoxFramePlaceHolder"></div>');
 			if(jQuery('.insertYboxAjaxHere.isAjax').length){
-				var yBoxHTML = '<div id="'+jQuery(url).attr('id')+'">'+jQuery(url).html()+'</div>';
+				var yBoxHTML = '<div id="'+url.replace('#','')+'">'+jQuery(url).html()+'</div>';
 				jQuery('.insertYboxAjaxHere').html(yBoxHTML).removeClass('isAjax');
-				//jQuery(url).remove();
 			}else{
 				jQuery(url).appendTo('.insertYboxAjaxHere');
 			}
@@ -171,6 +187,21 @@ function insertPopHtml(self,hasSelf,url,code){
 			},500);
 		}
 	}else{
+		if(!code && url){
+			var attrs = document.querySelector(url).attributes;
+			var attrHTML = '';
+			for(var i = 0;i < attrs.length;i++){
+				var value = attrs[i].value;
+				if(attrs[i].name == 'id' && value.indexOf('#') > -1){
+					value = value.replace('#','');
+				}
+				attrHTML += ' '+attrs[i].name+'="'+value+'"';
+			};
+			code = '<div'+attrHTML+'>'+jQuery(url).html()+'</div>';
+			
+			jQuery(url).after('<div class="yBoxFramePlaceHolder"></div>');
+			jQuery(url).remove();
+		}
 		jQuery('.insertYboxAjaxHere').html(code);
 	}
 };
@@ -191,7 +222,7 @@ function yBoxNext(self){
 		}
 	});
 	if(next){
-		jQuery('yBox').data('focus','');
+		jQuery('.yBox').data('focus','');
 		next.data('focus','yBoxNextImg');
 		next.trigger('click');
 	}
@@ -210,14 +241,14 @@ function yBoxPrev(self){
 		}
 	});
 	if(prev){
-		jQuery('yBox').data('focus','');
+		jQuery('.yBox').data('focus','');
 		prev.data('focus','yBoxPrevImg');
 		prev.trigger('click');
 	}
 };
 //Close
 jQuery('body').on('click','.yBoxOverlay',function(e){
-	if(e.target.className.indexOf('yBoxOverlay yBoxRTL active') > -1 || e.target.className.indexOf('yBoxOverlay active') > -1 || e.target.className == 'closeYbox'){
+	if(e.target.className.indexOf('yBoxOverlay yBoxRTL active') > -1 || e.target.className.indexOf('yBoxOverlay active') > -1 || e.target.className.indexOf('closeYbox') > -1){
 		if(typeof beforeYboxClose != 'undefined'){
 			var beforeClose = beforeYboxClose($('.yBox.yBoxFocus'));
 			if(beforeClose == false)
